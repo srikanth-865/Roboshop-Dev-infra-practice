@@ -15,10 +15,9 @@ resource "aws_instance" "mongodb" {
 
 resource "terraform_data" "mongodb" {
   # Re-run if the instance ID or IP changes
-  triggers_replace = {
-    instance_id = aws_instance.mongodb
-    instance_ip = aws_instance.mongodb.private_ip
-  }
+  triggers_replace =  [
+    aws_instance.mongodb.id,
+  ]
   
   connection {
     type        = "ssh"
