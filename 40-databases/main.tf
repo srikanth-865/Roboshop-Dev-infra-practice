@@ -34,7 +34,7 @@ resource "terraform_data" "mongodb" {
   }
   provisioner "remote-exec" {
     command = [
-       "chmod +x /tmp/script.sh"
+       "chmod +x /tmp/script.sh",
        "sudo /tmp/script.sh mongodb ${var.environment} roboshop.yaml"
     
     ]
