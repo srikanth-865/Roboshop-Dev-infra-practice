@@ -34,7 +34,7 @@ resource "terraform_data" "mongodb" {
   provisioner "remote-exec" {
     inline = [
        "chmod +x /tmp/script.sh",
-       "sudo /tmp/script.sh mongodb ${var.environment}"
+       "sudo  sh /tmp/script.sh mongodb ${var.environment}"
     
     ]
   }
