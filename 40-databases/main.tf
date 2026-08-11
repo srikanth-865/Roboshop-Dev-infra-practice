@@ -23,7 +23,7 @@ resource "terraform_data" "mongodb" {
     type        = "ssh"
     user        = "ec2-user"
     password = "DevOps321"
-    host        = aws_instance.mongodb.id
+    host        = aws_instance.mongodb.private_ip
   }
 
 # 2. Copy a single local file to a remote destination
