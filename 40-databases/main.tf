@@ -12,3 +12,32 @@ resource "aws_instance" "mongodb" {
     }
   )
 }
+
+resource "terraform_data" "mongodb" {
+  # Re-run if the instance ID or IP changes
+  triggers_replace = {
+    instance_id = aws_instance.mongodb
+    instance_ip = aws_instance.web.private_ip
+  }
+  
+  connection {
+    type        = "ssh"
+    user        = "ec2-user"
+    private_key = "DevOps321"
+    host        = aws_instance.mongodb.id
+  }
+
+# 2. Copy a single local file to a remote destination
+  provisioner "file" {
+    source      = "script.sh"
+    destination = "/tmp/script.sh"
+  }
+  provisioner "remote-exec" {
+    command = [
+       chmod +x /tmp/script.sh
+       sudo /tmp/script.sh mongodb "var.environment" roboshop.yaml
+    
+    ]
+  }
+}
+ 
