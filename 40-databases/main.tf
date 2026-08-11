@@ -17,7 +17,7 @@ resource "terraform_data" "mongodb" {
   # Re-run if the instance ID or IP changes
   triggers_replace = {
     instance_id = aws_instance.mongodb
-    instance_ip = aws_instance.web.private_ip
+    instance_ip = aws_instance.private_ip
   }
   
   connection {
