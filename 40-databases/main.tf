@@ -40,3 +40,18 @@ resource "terraform_data" "mongodb" {
   }
 }
  
+
+ # 2. Copy a single local file to a remote destination
+
+  provisioner "file" {  #copying local to remote 
+    source      = "bootstrap.sh"
+    destination = "/tmp/bootstrap.sh"
+  }
+
+  provisioner "remote-exec" { #for executing script with passing vslues
+    inline = [
+      "chmod +x /tmp/bootstrap.sh",
+       "sudo sh /tmp/bootstrap.sh mongodb ${var.environment}"
+    ]
+  }
+}
