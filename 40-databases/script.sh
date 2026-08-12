@@ -2,7 +2,7 @@
 component=$1
 environment=$2
 sudo dnf install ansible -y
-mkdir -p /var/log/roboshop1
+sudo mkdir -p /var/log/roboshop1
 sudo chown ec2-user:ec2-user /var/log/roboshop1
 sudo chmod -R 755  /var/log/roboshop1
 touch /var/log/roboshop1/ansible.log

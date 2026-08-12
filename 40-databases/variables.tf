@@ -11,3 +11,7 @@ variable "zone_id"{
 variable "domain_name"{
     default = "srikanth865.online"
 }
+
+/*variable "Mysql-password"{
+    type = string
+}*/
