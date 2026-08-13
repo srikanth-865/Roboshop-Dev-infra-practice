@@ -26,7 +26,7 @@ resource "aws_iam_role" "mysql" {
   resource "aws_iam_policy" "mysql" {
   name        = "${local.common_name}-mysql-root-password"
   path        = "/"
-  description = "mysql database is to fetching password""
+  description = "mysql database is to fetching password"
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
