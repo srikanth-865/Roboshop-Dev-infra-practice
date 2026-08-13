@@ -34,6 +34,7 @@ resource "aws_iam_role" "mysql" {
   }
 
 resource "aws_iam_policy_attachment" "mysql" {
+  name = "${local.common_name}-mysql"
   roles      = [aws_iam_role.mysql.name]
   policy_arn = aws_iam_policy.mysql.arn
 }
