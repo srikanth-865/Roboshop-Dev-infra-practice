@@ -1,5 +1,5 @@
 resource "aws_iam_role" "mysql" {
-  name = "${local.common_name}-mysql"
+  name = "${local.common_name}-mysql-root-password"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -24,7 +24,7 @@ resource "aws_iam_role" "mysql" {
   }
 
   resource "aws_iam_policy" "mysql" {
-  name        = "${local.common_name}-mysql"
+  name        = "${local.common_name}-mysql-root-password"
   path        = "/"
   description = "policy for getting & describing out mysql parameter to attach mysql instance"
 
