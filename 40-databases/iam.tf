@@ -30,25 +30,8 @@ resource "aws_iam_role" "mysql" {
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
-  policy =  {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "VisualEditor0",
-            "Effect": "Allow",
-            "Action": "ssm:GetParameter",
-            "Resource": "arn:aws:ssm:us-east-1:349627593718:parameter/Roboshop1/Dev/mysql-root-password"
-        },
-        {
-            "Sid": "VisualEditor1",
-            "Effect": "Allow",
-            "Action": "ssm:DescribeParameters",
-            "Resource": "*"
-        }
-    ]
-}
-}
-
+  policy =   file("mysql-iam-policy.json")
+  }
 resource "aws_iam_policy_attachment" "mysql" {
   role      = [aws_iam_role.mysql.name]
   policy_arn = aws_iam_policy.mysql.arn
