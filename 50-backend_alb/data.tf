@@ -1,6 +1,6 @@
 
 data "aws_ssm_parameter" "backend_alb_sg_id" {
-    name = "/${var.project}/${var.environment}/backend-alb_sg_id"
+    name = "/${var.project}/${var.environment}/backend-alb"
 }
 
 data "aws_ssm_parameter" "private_subnet_ids" {
