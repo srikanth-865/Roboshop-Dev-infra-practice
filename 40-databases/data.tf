@@ -6,6 +6,17 @@ data "aws_ssm_parameter" "mongodb_sg_id" {
   name = "/${var.project}/${var.environment}/mongodb"
 }
 
+data "aws_ssm_parameter" "redis_sg_id" {
+  name = "/${var.project}/${var.environment}/reddis"
+}
+
+data "aws_ssm_parameter" "rabbitmq_sg_id" {
+  name = "/${var.project}/${var.environment}/rabbitmq"
+}
+
+data "aws_ssm_parameter" "mysql_sg_id" {
+  name = "/${var.project}/${var.environment}/mysql"
+}
 
 # we are taking ami_id 
 data "aws_ami" "srikanth" {
