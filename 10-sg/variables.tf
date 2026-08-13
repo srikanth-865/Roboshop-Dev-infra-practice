@@ -9,9 +9,9 @@ variable "environment" {
   default = [
         "mongodb", "redis", "mysql", "rabbitmq",
         "catalogue", "user", "cart", "shipping", "payment",
-        "backend_alb",
+        "backend-alb",
         "frontend",
-        "frontend_alb",
+        "frontend-alb",
         "bastion",
         "vpn"
   ]
