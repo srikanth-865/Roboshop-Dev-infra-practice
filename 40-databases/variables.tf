@@ -12,6 +12,6 @@ variable "domain_name"{
     default = "srikanth865.online"
 }
 
-/*variable "Mysql-password"{
+variable "Mysql-password"{
     type = string
-}*/
+}
