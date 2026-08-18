@@ -1,3 +1,4 @@
+#creating a load balancer
 resource "aws_lb" "backend_alb" {
   name               = "${local.common_name}-backend-alb" # roboshop-dev-backend-alb
   internal           = true
@@ -14,7 +15,7 @@ resource "aws_lb" "backend_alb" {
     local.common_tags
   )
 }
-
+#we are going to attach the listner for giving responce of load balancer
 resource "aws_lb_listener" "http" {
   load_balancer_arn = aws_lb.backend_alb.arn
   port              = "80"
@@ -31,9 +32,10 @@ resource "aws_lb_listener" "http" {
   }
 }
 
+#its an optional means dns we gave to r53 with our name 
 resource "aws_route53_record" "www" {
   zone_id = var.zone_id
-  name    = "*.backend-alb-${var.environment}.${var.domain_name}" # *.backend-alb-dev.daws90s.shop
+  name    = "*.backend-alb-${var.environment}.${var.domain_name}" # *.backend-alb-dev.srikanth865.online
   type    = "A"
 
   alias {
