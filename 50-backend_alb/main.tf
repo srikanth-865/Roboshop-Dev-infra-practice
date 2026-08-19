@@ -35,7 +35,7 @@ resource "aws_lb_listener" "http" {
 #its an optional means dns we gave to r53 with our name 
 resource "aws_route53_record" "www" {
   zone_id = var.zone_id
-  name    = "*.backend-alb-${var.environment}.${var.domain_name}" # *.backend-alb-dev.srikanth865.online
+  name    = "*.backend-alb-${var.environment}.${var.domain_name}" # *.backend-alb-Dev.srikanth865.online
   type    = "A"
 
   alias {
