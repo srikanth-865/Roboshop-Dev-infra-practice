@@ -5,3 +5,25 @@ data "aws_ssm_parameter" "catalogue_sg_id" {
 data "aws_ssm_parameter" "private_subnet_ids" {
     name = "/${var.project}/${var.environment}/private_subnet_ids"
 }
+
+
+# we are taking ami_id 
+data "aws_ami" "srikanth" {
+  most_recent      = true
+  owners           = ["973714476881"]
+
+  filter {
+    name   = "name"
+    values = ["Redhat-9-DevOps-Practice"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+}
