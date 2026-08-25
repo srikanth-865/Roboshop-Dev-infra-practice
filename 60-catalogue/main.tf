@@ -154,7 +154,7 @@ dynamic "tag" {
   for_each = merge(
     {
       Name = "${local.common_name}-catalogue"
-    }
+    },
     local.common_tags
   )
 
