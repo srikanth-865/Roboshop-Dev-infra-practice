@@ -12,3 +12,7 @@ variable "project"{
 variable "environment"{
     default ="Dev"
 }
+
+variable "app_version"{
+    default = "v3"
+}
