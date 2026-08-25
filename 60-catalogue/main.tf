@@ -123,7 +123,53 @@ resource "aws_lb_target_group" "catalogue" {
   }
 }
 
+resource "aws_autoscaling_group" "catalogue" {
+  name_prefix         = "${local.common_name}-catalogue"
+  min_size            = 1  #atlesat 1 instance for running
+  max_size            = 10 #we can go upto 10 instnaces
+  desired_capacity    = 2 #we want 2 instances
+  vpc_zone_identifier = [local.private_subnet_id] # Replace with your Subnet IDs
+   force_delete              = false
+  health_check_type         = "ELB"
+  health_check_grace_period = 120 # for 2 min we can decide instances healthy
+
+  launch_template { 
+    id      = aws_launch_template.catalogue.id
+    version = "$Latest"
+  }
+  target_group_arns = [aws_lb_target_group.catalogue.arn] # Autoscaling launches into specific target group catalogue 
+
+ # Forces instances to rolling-update when launch template changes
+  instance_refresh {
+    strategy = "Rolling"
+    preferences {
+      min_healthy_percentage = 50
+    }
+    triggers = ["launch_template"]
+  }
+
+#for Autoscaling resource is providing only tag with dynamic map values so we create dynamic block
+
+dynamic "tag" {
+  for_each = merge(
+    {
+      Name = "${local.common_name}-catalogue"
+    }
+    local.common_tags
+  )
+
+  content {
+      key                 = tag.key
+      value               = tag.value
+      propagate_at_launch = true
+    }
+    }
 
 
+  # with in 15min autoscaling should be successful to launch instances
+  timeouts {
+    delete = "15m"
+  }
+}
 
   
