@@ -11,6 +11,12 @@ data "aws_ssm_parameter" "vpc_id" {
 }
 
 
+data "aws_ssm_parameter" "backend_alb_listener_arn" {
+    name =  "/${var.project}/${var.environment}/backend_alb_listener_arn" 
+}
+ 
+
+
 # we are taking ami_id 
 data "aws_ami" "srikanth" {
   most_recent      = true

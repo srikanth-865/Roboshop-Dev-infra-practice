@@ -173,4 +173,36 @@ dynamic "tag" {
   }
 }
 
+ # Attach the Target Tracking Policy
+resource "aws_autoscaling_policy" "catalogue" {
+  name                   = "${local.common_name}-catalogue"
+  autoscaling_group_name = aws_autoscaling_group.catalogue.name   #attahing catalogue group to this policy
+  policy_type            = "TargetTrackingScaling"
+   estimated_instance_warmup = 120  #for 2 min of instance checking
+  target_tracking_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ASGAverageCPUUtilization"
+    }
+  
+
+    target_value = 75.0  #Average CPU utilization = 70% then when CPU utilization goes above 70%, Auto Scaling can scale out (add instances) to bring the average CPU back toward 70%.
+}
+}
+
+resource "aws_lb_listener_rule" "catalogue" {
+  listener_arn = local.backend_alb_listener_arn  #we attach our loadbalancer  backend_alb arn
+  priority     = 10 # we can give our priority 
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.catalogue.arn  #we give to our target group catalogue forwarding 
+  }
+
+  condition {
+    host_header {
+      values = ["catalogue.backend-alb-${var.environment}.${var.domain_name}"] #as we give *.backend-alb-Dev.srikanth865.online
+    }
+  }
+}
+
   
