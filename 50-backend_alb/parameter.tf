@@ -1,5 +1,5 @@
-resource "aws_ssm_parameter" "aws_alb_listner" {
-  name  = "/${var.project}/${var.environment}/backend_alb_listener_arn"  #Roboshop1/Dev/mysql
+resource "aws_ssm_parameter" "backend_alb_listner" {
+  name  = "/${var.project}/${var.environment}/backend_alb_listener_arn"  
   type  = "String"
   value = aws_lb_listener.http.arn
 }
