@@ -4,4 +4,5 @@ module "component"{
     components = each.key
     environment = var.environment
     app_version = each.value.app_version 
+    rule_priority = each.value.rule_priority
 }
