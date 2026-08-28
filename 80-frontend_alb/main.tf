@@ -23,7 +23,7 @@ resource "aws_lb_listener" "https" {
   
   # Recommended secure TLS policy
   ssl_policy        =  "ELBSecurityPolicy-2016-08"
-  certificate_arn   = local.certificate_arn.value
+  certificate_arn   = local.certificate_arn
   
    default_action {
     type = "fixed-response"
