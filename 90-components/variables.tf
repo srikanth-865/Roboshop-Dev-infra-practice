@@ -1,6 +1,6 @@
 variable "components"{
     default = {
-        catalogue {
+        catalogue = {
                 app_version = "v3"  #its on version 3
                   }
               }
