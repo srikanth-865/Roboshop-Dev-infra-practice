@@ -4,7 +4,7 @@ variable "components"{
                 rule_priority = 10
                 app_version = "v3"  #its on version 3
                   }
-                user = {
+               /* user = {
                     rule_priority = 20
                    app_version = "v3"  #its on version 3
                   }
@@ -24,7 +24,7 @@ variable "components"{
                    frontend = {
                         rule_priority = 10
                    app_version = "v3"  #its on version 3
-                  }
+                  }*/
               }
  }
 variable "project"{
