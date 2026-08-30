@@ -5,4 +5,5 @@ module "component"{
     environment = var.environment
     app_version = each.value.app_version 
     rule_priority = each.value.rule_priority
+    domain_name = var.domain_name
 }

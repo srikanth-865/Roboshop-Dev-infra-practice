@@ -1,14 +1,14 @@
 variable "components"{
     default = {
-        catalogue = {
-                rule_priority = 20
+               catalogue = {
+                rule_priority = 10
                 app_version = "v3"  #its on version 3
                   }
                 user = {
                     rule_priority = 20
                    app_version = "v3"  #its on version 3
                   }
-                 user = {
+                 cart = {
                     rule_priority = 30
                    app_version = "v3"  #its on version 3
                   }
