@@ -13,7 +13,7 @@ variable "components"{
                    app_version = "v3"  #its on version 3
                   }
     
-                   /*shipping = {
+                shipping = {
                     rule_priority = 40
                    app_version = "v3"  #its on version 3
                   }
