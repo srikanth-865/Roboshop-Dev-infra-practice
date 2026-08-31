@@ -9,6 +9,7 @@ variable "components"{
                    app_version = "v3"  #its on version 3
                   }
     }
+}
                  /*cart = {
                     rule_priority = 30
                    app_version = "v3"  #its on version 3
@@ -26,7 +27,7 @@ variable "components"{
                         rule_priority = 10
                    app_version = "v3"  #its on version 3
                   }
-              }*/
+              */
 variable "project"{
     default = "Roboshop1"
 }
