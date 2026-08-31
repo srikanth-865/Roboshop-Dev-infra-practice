@@ -12,13 +12,14 @@ variable "components"{
                     rule_priority = 30
                    app_version = "v3"  #its on version 3
                   }
-                  }
-}
+    
                    /*shipping = {
                     rule_priority = 40
                    app_version = "v3"  #its on version 3
                   }
-                   payment = {
+    }
+}
+                  /* payment = {
                     rule_priority = 50
                    app_version = "v3"  #its on version 3
                   }
