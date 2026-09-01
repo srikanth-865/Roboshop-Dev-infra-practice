@@ -21,13 +21,14 @@ variable "components"{
                     rule_priority = 50
                    app_version = "v3"  #its on version 3
                   }
-    }
-}
+
               #we are passing frontend also here and it  will connect to frontend load-balancer
-                  /* frontend = {
+                  frontend = {
                         rule_priority = 10
                    app_version = "v3"  #its on version 3
-                  } */
+                            } 
+                }
+}
 
 variable "project"{
     default = "Roboshop1"
