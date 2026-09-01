@@ -17,14 +17,14 @@ variable "components"{
                     rule_priority = 40
                    app_version = "v3"  #its on version 3
                   }
-    }
-}
-                  /* payment = {
+             payment = {
                     rule_priority = 50
                    app_version = "v3"  #its on version 3
                   }
-            #we are passing frontend also here and it  will connect to frontend load-balancer
-                   frontend = {
+    }
+}
+              #we are passing frontend also here and it  will connect to frontend load-balancer
+                  /* frontend = {
                         rule_priority = 10
                    app_version = "v3"  #its on version 3
                   } */
