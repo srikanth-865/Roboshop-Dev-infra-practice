@@ -25,16 +25,17 @@ resource "aws_lb_listener" "https" {
   ssl_policy        =  "ELBSecurityPolicy-2016-08"
   certificate_arn   = local.certificate_arn
   
-   default_action {
-    type = "fixed-response"
-
-    fixed_response {
-      content_type = "text/html"
-      message_body = "<h1>Hi, I am from HTTPS Frontend ALB</h1>"
-      status_code  = "200"
-    }
+   action {
+    type = "forward"
+    target_group_arn = local.frontend_target_group_arn
   }
+  condition {
+    host_header {
+      values = [local.host_header]
+    }
+    }
 }
+
 
 #its an optional means dns we gave to r53 with our name 
 resource "aws_route53_record" "www" {
