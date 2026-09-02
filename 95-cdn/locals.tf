@@ -8,6 +8,7 @@ common_tags = {
   certificate_arn = data.aws_ssm_parameter.certificate_arn.value
   cachingOptmized = data.aws_cloudfront_cache_policy.cachingOptmized.id
   cachingDisabled = data.aws_cloudfront_cache_policy.cachingDisabled.id
+  cloudfront_origin = "${lower(var.project)}-${lower(var.environment)}.${lower(var.domain_name)}"
 }
 
 

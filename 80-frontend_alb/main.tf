@@ -40,7 +40,7 @@ resource "aws_lb_listener" "https" {
 #its an optional means dns we gave to r53 with our name 
 resource "aws_route53_record" "www" {
   zone_id = var.zone_id
-  name    = "${var.project}-${var.environment}.srikanth865.online" #this for frontend so we give Roboshop1-Dev.srikanth865.online
+  name    =  "${lower(var.project)}-${lower(var.environment)}.${lower(var.domain_name)}" #this for frontend so we give roboshop1-dev.srikanth865.online
   type    = "A"
 
   alias {

@@ -1,8 +1,8 @@
 resource "aws_cloudfront_distribution" "roboshop" {
 
   origin {
-    domain_name = "${var.project}-${var.environment}.${var.domain_name}"
-    origin_id   = "${var.project}-${var.environment}.${var.domain_name}"
+    domain_name = local.cloudfront_origin  #roboshop1-dev.srikanth865.online
+    origin_id   = local.cloudfront_origin   #roboshop1-dev.srikanth865.online
 
     custom_origin_config {
       http_port              = 80
@@ -17,14 +17,13 @@ resource "aws_cloudfront_distribution" "roboshop" {
   comment         = "Roboshop CloudFront Distribution"
 
   # CloudFront CDN hostname
-  # roboshop1-cdn.srikanth865.online
-  aliases = ["${lower(var.project)}-cdn.${lower(var.domain_name)}"]
+  aliases = ["${lower(var.project)}-cdn.${lower(var.domain_name)}"]  # roboshop1-cdn.srikanth865.online
 
   # Default cache behavior
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = "${var.project}-${var.environment}.${var.domain_name}"
+    target_origin_id = local.cloudfront_origin
 
     viewer_protocol_policy = "https-only"
 
@@ -40,7 +39,7 @@ resource "aws_cloudfront_distribution" "roboshop" {
     path_pattern     = "/media/*"
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD", "OPTIONS"]
-    target_origin_id = "${var.project}-${var.environment}.${var.domain_name}"
+    target_origin_id =  local.cloudfront_origin
 
     min_ttl     = 0
     default_ttl = 86400
@@ -56,7 +55,7 @@ resource "aws_cloudfront_distribution" "roboshop" {
     path_pattern     = "/videos/*"
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD", "OPTIONS"]
-    target_origin_id = "${var.project}-${var.environment}.${var.domain_name}"
+    target_origin_id =  local.cloudfront_origin
 
     min_ttl     = 0
     default_ttl = 86400
@@ -88,17 +87,11 @@ resource "aws_cloudfront_distribution" "roboshop" {
   }
 }
 
-
 resource "aws_route53_record" "www" {
-
   zone_id = var.zone_id
-
-  # roboshop1-cdn.srikanth865.online
-  name = "${lower(var.project)}-cdn.${lower(var.domain_name)}"
-
+  name = "${lower(var.project)}-cdn.${lower(var.domain_name)}"   # roboshop1-cdn.srikanth865.online this we use in website
   type            = "A"
   allow_overwrite = true
-
   alias {
     name                   = aws_cloudfront_distribution.roboshop.domain_name
     zone_id                = aws_cloudfront_distribution.roboshop.hosted_zone_id
