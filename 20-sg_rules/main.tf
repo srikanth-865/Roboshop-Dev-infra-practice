@@ -300,7 +300,7 @@ resource "aws_security_group_rule" "frontend_alb_http" {
 }
 
 
-###bastion
+###bastion 
 /* resource "aws_security_group_rule" "bastion_my_public_ip" { #as previously we used for this bastion  without VPN 
   type              = "ingress"
   from_port         = 22
@@ -316,7 +316,7 @@ resource "aws_security_group_rule" "frontend_alb_http" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  cidr_blocks = ["13.221.175.208/32"]  #its an vpn public ip 
+  cidr_blocks = ["100.61.138.193/32"]  #its an vpn public ip whenever we create VPN replace this,basically company gives elastic ip
   #source_security_group_id = local.vpn_sg_id
   security_group_id = local.bastion_sg_id
 }
@@ -337,10 +337,11 @@ resource "aws_security_group_rule" "vpn_public_943" { #this for admin console ac
   to_port           = 943
   protocol          = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
+
   security_group_id = local.vpn_sg_id
 }
 
-resource "aws_security_group_rule" "vpn_public_443" {   #this for admin console access
+resource "aws_security_group_rule" "vpn_public_443" {   #this for admin console access to our  vpn app connect/disconnect purpose
   type              = "ingress"
   from_port         = 443
   to_port           = 443
@@ -354,17 +355,16 @@ resource "aws_security_group_rule" "vpn_ssh" {  #this for my ip acces vpn to ssh
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  #cidr_blocks = ["${chomp(data.http.my_public_ip.response_body)}/32"] 
-  cidr_blocks = ["0.0.0.0/0"]
+ cidr_blocks = ["0.0.0.0/0"]
   security_group_id = local.vpn_sg_id
 } 
 
-#this for backendevelper check api we give vpn id 
-# resource "aws_security_group_rule" "backend_alb_vpn" {
-#   type              = "ingress"
-#   from_port         = 80
-#   to_port           = 80
-#   protocol          = "tcp"
-#   source_security_group_id = local.vpn_sg_id
-#   security_group_id = local.backend_alb_sg_id
-# }
+#this for backendevelper check api testing we give only our vpn id 
+resource "aws_security_group_rule" "backend_alb_vpn" {
+  type              = "ingress"
+ from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  source_security_group_id = local.vpn_sg_id
+ security_group_id = local.backend_alb_sg_id
+ }

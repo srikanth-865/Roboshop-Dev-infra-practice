@@ -57,3 +57,4 @@ data "aws_ssm_parameter" "vpn_sg_id" {
 data "http" "my_ip" {
   url = "https://ipv4.icanhazip.com"
 }
+
