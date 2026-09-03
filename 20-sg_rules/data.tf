@@ -50,6 +50,10 @@ data "aws_ssm_parameter" "bastion_sg_id" {
   name = "/${var.project}/${var.environment}/bastion"
 }
 
+data "aws_ssm_parameter" "vpn_sg_id" {
+  name = "/${var.project}/${var.environment}/vpn"
+}
+
 data "http" "my_ip" {
   url = "https://ipv4.icanhazip.com"
 }
